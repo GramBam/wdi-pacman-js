@@ -64,11 +64,12 @@ function displayStats() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
-  console.log('(q) Quit');
+  console.log('(p) Eat Power-Pellet');
   console.log('(1) Eat Inky');
   console.log('(2) Eat Blinky');
   console.log('(3) Eat Pinky');
   console.log('(4) Eat Clyde');
+  console.log('(q) Quit');
 }
 
 function displayPrompt() {
@@ -98,15 +99,26 @@ function eatGhosts(ghosts) {
 
       console.log('\nAte ' + ghosts.name + '!');
 
-      score += 10;
+      score += 200;
  }
 }
+
 
 function checkLives() {
   if (lives === 0) {
     process.exit();
   }
 }
+
+function eatPowerPellet(){
+  score += 50;
+  powerPellets--;
+  ghosts.forEach(function(ghosts) {
+  ghosts.edible = true;
+})
+
+}
+
 
 
 // Process Player's Input
@@ -130,6 +142,9 @@ function processInput(key) {
       break;
       case '4':
       eatGhosts(ghosts[3]);
+      break;
+      case 'p':
+      eatPowerPellet();
       break;
     default:
       console.log('\nInvalid Command!');
