@@ -1,6 +1,7 @@
 // Setup initial game stats
 var score = 0;
 var lives = 2;
+var powerPellets = 4;
 
 
 // Define your ghosts here
@@ -37,7 +38,9 @@ var clyde = {
   edible: false
 };
 
-// replace this comment with your four ghosts setup as objects
+var ghosts = [inky, blinky, pinky, clyde];
+
+
 
 
 // Draw the screen functionality
@@ -55,13 +58,17 @@ function clearScreen() {
 }
 
 function displayStats() {
-  console.log('Score: ' + score + '     Lives: ' + lives);
+  console.log('Score: ' + score + '     Lives: ' + lives + '\n\n\nPower-Pellets: ' + powerPellets);
 }
 
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
   console.log('(q) Quit');
+  console.log('(1) Eat Inky');
+  console.log('(2) Eat Blinky');
+  console.log('(3) Eat Pinky');
+  console.log('(4) Eat Clyde');
 }
 
 function displayPrompt() {
@@ -76,6 +83,31 @@ function eatDot() {
   score += 10;
 }
 
+function eatGhosts(ghosts) {
+
+  if (!ghosts.edible) {
+
+
+    console.log('\nKilled by ' + ghosts.name + ghosts.colour + '!');
+
+    lives--
+
+    checkLives()
+
+} else {
+
+      console.log('\nAte ' + ghosts.name + '!');
+
+      score += 10;
+ }
+}
+
+function checkLives() {
+  if (lives === 0) {
+    process.exit();
+  }
+}
+
 
 // Process Player's Input
 function processInput(key) {
@@ -86,6 +118,18 @@ function processInput(key) {
       break;
     case 'd':
       eatDot();
+      break;
+      case '1':
+      eatGhosts(ghosts[0]);
+      break;
+      case '2':
+      eatGhosts(ghosts[1]);
+      break;
+      case '3':
+      eatGhosts(ghosts[2]);
+      break;
+      case '4':
+      eatGhosts(ghosts[3]);
       break;
     default:
       console.log('\nInvalid Command!');
