@@ -64,11 +64,12 @@ function displayStats() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
+  if (powerPellets > 0) {
   console.log('(p) Eat Power-Pellet');
-  console.log('(1) Eat Inky');
-  console.log('(2) Eat Blinky');
-  console.log('(3) Eat Pinky');
-  console.log('(4) Eat Clyde');
+}
+  ghosts.forEach(function(ghost){
+  console.log('(' + ghost.menu_option + ') Eat '+ ghost.name + ' (' + checkEdible(ghost) + ')')
+})
   console.log('(q) Quit');
 }
 
@@ -97,7 +98,7 @@ function eatGhosts(ghosts) {
 
 } else {
 
-      console.log('\nAte the ' + ghosts.character + ' ' + ghosts.name + '!');
+      console.log('\nAte the ' + ghosts.character + ' ' + ghosts.name + '!' + '(He is now inedible)');
 
       score += 200;
 
@@ -124,6 +125,14 @@ function eatPowerPellet(){
   console.log("\nNo Power-Pellets left!");
 }
 
+}
+
+function checkEdible(ghost) {
+  if (ghost.edible === false) {
+  return "Inedible"
+} else {
+  return "Edible"
+}
 }
 
 
@@ -176,7 +185,7 @@ drawScreen();
 stdin.on('data', function(key) {
   process.stdout.write(key);
   processInput(key);
-  setTimeout(drawScreen, 300); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
+  setTimeout(drawScreen, 900); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
 });
 
 // Player Quits
