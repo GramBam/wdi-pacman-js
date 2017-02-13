@@ -97,9 +97,11 @@ function eatGhosts(ghosts) {
 
 } else {
 
-      console.log('\nAte ' + ghosts.name + '!');
+      console.log('\nAte the ' + ghosts.character + ' ' + ghosts.name + '!');
 
       score += 200;
+
+      ghosts.edible = false;
  }
 }
 
@@ -111,11 +113,16 @@ function checkLives() {
 }
 
 function eatPowerPellet(){
+  if (powerPellets > 0) {
   score += 50;
   powerPellets--;
   ghosts.forEach(function(ghosts) {
   ghosts.edible = true;
+
 })
+} else {
+  console.log("\nNo Power-Pellets left!");
+}
 
 }
 
